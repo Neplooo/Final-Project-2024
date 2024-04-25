@@ -2,11 +2,18 @@
 import cv2
 import numpy as np
 
-# Create Camera Object
-vid = cv2.VideoCapture(0)
-#vid.set(cv2.CAP_PROP_SATURATION, 65)
+# Create Variables
+vid = None
 
-while True:
+def startCamera():
+    # Create Camera Object
+    global vid
+    vid = cv2.VideoCapture(0)
+    #vid.set(cv2.CAP_PROP_SATURATION, 65)
+
+    return vid
+
+def getFrame():
     # Create a frame
     ret, frame = vid.read()
 
@@ -68,9 +75,19 @@ while True:
     # Show Mean Filter
     #cv2.imshow("Mean Filter", meanFilter)
 
+    # Return the turnDir
+    return turnDir
+
+startCamera()
+
+while True:
+    getFrame()
+
     # Quit with "Q" Button
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+
 
 # Kill windows after finished
 vid.release()
