@@ -13,7 +13,6 @@ class ColorDetection:
         # Create Camera Object
         vid = cv2.VideoCapture(0)
         #vid.set(cv2.CAP_PROP_SATURATION, 65)
-
         return vid
 
     def getFrame(vid):
@@ -22,7 +21,7 @@ class ColorDetection:
 
         # Convert RGB Values in frame to HSV
         HSVConvert = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
+        
         # Red Limits: Lower: (0, 50, 50) Upper: (10, 255, 255)
         # Green Limits: Lower: (40, 40, 40) Upper: (80, 255, 255)
         # Blue Limits: Lower: (98, 50, 50) Upper: (139, 255, 255)

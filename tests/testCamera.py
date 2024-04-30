@@ -1,4 +1,4 @@
-# NOTE: DO NOT USE, TEST ALGORITHM IS STILL BROKEN
+# NOTE: If test passes: Camera is plugged in. If Test fails, Camera is not plugged in.
 
 # Import Stuff
 import os, sys
@@ -14,17 +14,13 @@ sys.path.append(moduleDir)
 # Import the ColorVision Code
 from ColorVision import ColorDetection
 
-#result = str(ColorDetection.startCamera())
-#print(result)
-#formatResult = result.join(line.strip() for line in result.splitlines())
-#print(formatResult)
-
-# CAMERA TEST STILL BROKEN
+# Camera Test will check to see if camera is plugged in
 class TestCamera(unittest.TestCase):
-    
+
     def test_cam(self):
         self.camCheck = ColorDetection()
-        cam = self.camCheck.startCamera
-        self.assertTrue()
+        cam = cv2.VideoCapture(0)
+        self.assertTrue(cam.isOpened())
+
 
 unittest.main(argv=[''], verbosity=2, exit=False)
