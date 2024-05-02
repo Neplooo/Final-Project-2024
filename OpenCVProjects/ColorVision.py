@@ -2,19 +2,21 @@
 import cv2
 import numpy as np
 
+# This class contains everything needed to run an object detection script based on color.
 class ColorDetection:
-
 
     # Create Variables
     def __init__(self):
         vid = None
 
+    #This code segment starts up the camera object. This is separated as it should only be run once.
     def startCamera():
         # Create Camera Object
         vid = cv2.VideoCapture(0)
         #vid.set(cv2.CAP_PROP_SATURATION, 65)
         return vid
 
+    # This function does all the heavy lifting and calculations. This is run in the loop.
     def getFrame(vid):
         # Create a frame
         ret, frame = vid.read()
@@ -26,7 +28,7 @@ class ColorDetection:
         # Green Limits: Lower: (40, 40, 40) Upper: (80, 255, 255)
         # Blue Limits: Lower: (98, 50, 50) Upper: (139, 255, 255)
 
-        # Set the color mask limits
+        # Set the color mask limits (Default is Green)
         LLimit = (40, 40, 40)
         ULimit = (80, 255, 255)
 
@@ -48,13 +50,13 @@ class ColorDetection:
 
         # Gather Info about The frame
         M = cv2.moments(meanFilter)
-        #print(M)
         
         # Take the Centroid Length and Width by doing fancy math: https://learnopencv.com/find-center-of-blob-centroid-using-opencv-cpp-python/ 
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         
-        #print(str(cX) + " " + str(cY))
+        # You can use this to debug if the centroid calculations are not working.
+        # print(str(cX) + " " + str(cY))
         
         # Create Basic Robot Commands
         if cX >= 350:
